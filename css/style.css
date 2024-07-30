@@ -310,7 +310,8 @@ header {
     display: flex;
     height: 4%;
     background-color: rgba(19, 22, 27, 0);
-    backdrop-filter: blur(10px);
+    border: 15px;
+    border-color: #d3d9d4;
     position: fixed;
     top: 0;
     left: 0;
