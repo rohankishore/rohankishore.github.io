@@ -10,6 +10,8 @@
     --color2: #e9bdbe;
     --color3: #748c92;
     --color4: #fbf1de;
+    --color5: #24292f;
+    --color6: #5dc55d;
 }
 
 html {
@@ -309,7 +311,7 @@ hr {
 header {
     display: flex;
     height: 4%;
-    background-color: rgba(19, 22, 27, 0);
+    background-color: #1d2433;
     border: 15px;
     border-color: #d3d9d4;
     position: fixed;
@@ -503,7 +505,7 @@ h3 {
     font-family: 'Quicksand', sans-serif;
     font-weight: 400;
     font-style: normal;
-    height: 65vh;
+    height: 85vh;
     display: flex;
 
     vertical-align: baseline;
@@ -875,4 +877,23 @@ footer {
 
 .project_content {
     padding: 10%;
+}
+
+
+
+.fiverr_item {
+    margin-top: 2%;
+    width: 70%;
+    background-color: var(--color6);
+    border-radius: 20px;
+    transition: box-shadow 1s ease;
+    box-shadow: 0 0 0px var(--color5), 0 0 0px var(--color6);
+}
+.fiverr_item ._hr {
+    height: 30px;
+}
+
+.fiverr_item:hover {
+    transition: box-shadow 1s ease;
+    box-shadow: 0 0 10px var(--color6), 0 0 50px var(--color6);
 }
