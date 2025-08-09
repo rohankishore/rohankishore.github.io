@@ -1,954 +1,509 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rohan Kishore</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!--
-    - favicon
-  -->
-  <link rel="shortcut icon" href="./assets/images/logo.ico" type="image/x-icon">
+    <title>Rohan Kishore | Student & Developer</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23a855f7'/><text x='50' y='70' font-family='sans-serif' font-size='60' font-weight='bold' fill='white' text-anchor='middle'>RK</text></svg>">
 
-  <!--
-    - custom css link
-  -->
-  <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --dark-bg: #030014;
+            --purple: #a855f7;
+            --light-purple: #c084fc;
+            --fiverr-green: #1DBF73;
+            --fiverr-green-hover: #18a062;
+            --text-primary: #ffffff;
+            --text-secondary: #c7c7c7;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --border-color: rgba(255, 255, 255, 0.1);
+        }
 
-  <!--
-    - google font link
-  -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+            cursor: none;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800"%3E%3Crect fill="%23030014" width="800" height="800"/%3E%3Cg fill-opacity="0.2"%3E%3Ccircle fill="%231e0c42" cx="400" cy="400" r="500"/%3E%3Ccircle fill="%232e1263" cx="400" cy="400" r="400"/%3E%3Ccircle fill="%233c1980" cx="400" cy="400" r="300"/%3E%3Ccircle fill="%234a219d" cx="400" cy="400" r="200"/%3E%3Ccircle fill="%235829bb" cx="400" cy="400" r="100"/%3E%3C/g%3E%3C/svg%3E');
+            background-attachment: fixed;
+            background-size: cover;
+        }
+
+        .cursor-dot, .cursor-outline {
+            pointer-events: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            border-radius: 50%;
+            opacity: 0;
+            transform: translate(-50%, -50%);
+            transition: opacity 0.3s ease-in-out, transform 0.2s ease-in-out;
+            z-index: 9999;
+        }
+        .cursor-dot { width: 8px; height: 8px; background-color: var(--purple); }
+        .cursor-outline { width: 40px; height: 40px; background-color: rgba(168, 85, 247, 0.3); transition-duration: 0.1s; }
+        body:hover .cursor-dot, body:hover .cursor-outline { opacity: 1; }
+        a, button, .project-card, .skill-item { cursor: none; }
+        .cursor-interact { transform: translate(-50%, -50%) scale(2.5); }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--dark-bg); }
+        ::-webkit-scrollbar-thumb { background: var(--purple); border-radius: 4px; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 3rem;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+            background: rgba(3, 0, 20, 0.5);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+        }
+        nav .logo { font-size: 1.5rem; font-weight: 700; color: var(--purple); }
+        nav .nav-links { display: flex; gap: 2rem; list-style: none; }
+        nav .nav-links a { color: var(--text-primary); text-decoration: none; font-weight: 500; transition: color 0.3s ease; }
+        nav .nav-links a:hover { color: var(--purple); }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            text-align: left;
+            padding-top: 80px;
+        }
+        .hero h1 { font-size: 4rem; font-weight: 900; margin-bottom: 0.5rem; }
+        .hero .subtitle { font-size: 3rem; font-weight: 700; color: var(--purple); margin-bottom: 1rem; height: 3.5rem; }
+        .hero .subtitle .cursor { display: inline-block; width: 3px; height: 3rem; background-color: var(--light-purple); animation: blink 0.7s infinite; }
+        @keyframes blink { 50% { opacity: 0; } }
+        .hero p { font-size: 1.2rem; color: var(--text-secondary); max-width: 600px; }
+
+        .perspective-container { height: 200vh; position: relative; }
+        .sticky-container { position: sticky; top: 0; height: 100vh; overflow: hidden; perspective: 1000px; }
+        .projects-grid-wrapper {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 120%;
+            transform-style: preserve-3d;
+            transition: transform 0.1s linear;
+        }
+        .projects-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+        .project-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            backdrop-filter: blur(5px);
+            aspect-ratio: 4/3;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .project-card h3 { font-size: 1.2rem; margin-bottom: 0.5rem; color: var(--text-primary); }
+        .project-card p { font-size: 0.9rem; color: var(--text-secondary); }
+        .project-card:hover { transform: translateY(-8px) scale(1.05); box-shadow: 0 10px 30px rgba(168, 85, 247, 0.3); }
+
+        .section {
+            padding: 6rem 0;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .section.is-visible { opacity: 1; transform: translateY(0); }
+        .section-title { text-align: center; font-size: 2.5rem; font-weight: 700; margin-bottom: 1rem; color: var(--purple); }
+        .section-subtitle { text-align: center; font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 4rem; }
+
+        .github-graph-container {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+        .github-graph {
+            display: grid;
+            grid-template-rows: repeat(7, 15px);
+            grid-auto-flow: column;
+            grid-auto-columns: 15px;
+            gap: 4px;
+        }
+        .day { background-color: #161b22; border-radius: 2px; }
+        .day[data-level="1"] { background-color: #0e4429; }
+        .day[data-level="2"] { background-color: #006d32; }
+        .day[data-level="3"] { background-color: #26a641; }
+        .day[data-level="4"] { background-color: #39d353; }
+        .github-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+            color: var(--text-secondary);
+        }
+
+        .about-text { max-width: 900px; margin: 0 auto; font-size: 2.5rem; line-height: 1.6; font-weight: 700; text-align: center; }
+        .about-text span { color: rgba(255, 255, 255, 0.2); transition: color 0.5s ease; }
+        .about-text span.visible { color: var(--text-primary); }
+        .about-text span.highlight { color: var(--purple); }
+
+        .skills-grid-wrapper { position: relative; }
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 1.5rem; }
+        .skill-item {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            font-weight: 500;
+            transition: background 0.3s, transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .skill-item:hover { background: rgba(168, 85, 247, 0.1); transform: translateY(-5px); }
+        .skills-grid-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border-radius: 12px;
+            background: radial-gradient(350px circle at var(--mouse-x) var(--mouse-y), var(--purple), transparent 80%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            mix-blend-mode: soft-light;
+        }
+        .skills-grid-wrapper:hover::before { opacity: 0.4; }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+        .testimonial-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+        }
+        .testimonial-card .quote {
+            font-style: italic;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        .testimonial-card .author {
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+        .testimonial-card .role {
+            font-size: 0.9rem;
+            color: var(--light-purple);
+        }
+
+        .cta-section { text-align: center; }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            border: 2px solid transparent;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .button svg { width: 20px; height: 20px; fill: currentColor; }
+        .button:hover { transform: translateY(-3px); }
+
+        .button-primary {
+            background: var(--purple);
+            color: var(--text-primary);
+        }
+        .button-primary:hover { background-color: var(--light-purple); }
+
+        /* NEW: Fiverr Button Style */
+        .button-fiverr {
+            background: var(--fiverr-green);
+            color: var(--text-primary);
+        }
+        .button-fiverr:hover { background-color: var(--fiverr-green-hover); }
+
+
+        .footer {
+            position: relative;
+            padding: 6rem 2rem 2rem;
+            overflow: hidden;
+            border-top: 1px solid var(--border-color);
+        }
+        .footer-bg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 150%;
+            height: 150%;
+            transform: translate(-50%, -50%);
+            background: radial-gradient(circle, #4c00b0 0%, #1a003e 30%, var(--dark-bg) 60%);
+            animation: rotate-bg 30s linear infinite;
+            z-index: -1;
+        }
+        @keyframes rotate-bg { from { transform: translate(-50%, -50%) rotate(0deg); } to { transform: translate(-50%, -50%) rotate(360deg); } }
+        .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin-bottom: 4rem; position: relative; }
+        .footer-column h4 { font-size: 1.2rem; margin-bottom: 1rem; }
+        .footer-column p, .footer-column a { color: var(--text-secondary); text-decoration: none; line-height: 1.8; transition: color 0.3s; }
+        .footer-column a:hover { color: var(--purple); }
+        .footer-socials { display: flex; gap: 1.5rem; align-items: center; }
+        .footer-socials a { font-size: 1.5rem; line-height: 0; }
+        .footer-socials svg { width: 24px; height: 24px; fill: var(--text-secondary); transition: fill 0.3s, transform 0.3s; }
+        .footer-socials a:hover svg { fill: var(--purple); transform: scale(1.1); }
+        .footer-bottom { text-align: center; color: var(--text-secondary); padding-top: 2rem; border-top: 1px solid var(--border-color); }
+
+        @media (max-width: 768px) {
+            body { cursor: auto; }
+            .cursor-dot, .cursor-outline { display: none; }
+            a, button, .project-card, .skill-item { cursor: pointer; }
+            nav { padding: 1.5rem 1.5rem; }
+            nav .nav-links { display: none; }
+            .hero h1 { font-size: 3rem; }
+            .hero .subtitle { font-size: 1.8rem; height: 2.5rem; }
+            .hero .subtitle .cursor { height: 2rem; }
+            .projects-grid { grid-template-columns: repeat(2, 1fr); }
+            .about-text { font-size: 1.8rem; }
+        }
+    </style>
 </head>
-
 <body>
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
 
-  <!--
-    - #MAIN
-  -->
+    <nav>
+        <div class="logo">Rohan Kishore</div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#testimonials">Testimonials</a></li>
+            <li><a href="#resume">Resume</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
 
-  <main>
+    <main>
+        <section id="home" class="hero container">
+            <h1>Hey 👋, I'm Rohan Kishore</h1>
+            <div class="subtitle" id="typewriter-subtitle">
+                <span id="typewriter-text"></span><span class="cursor"></span>
+            </div>
+            <p>Exploring the digital world, building cool things, and having fun along the way.</p>
+        </section>
 
-    <!--
-      - #SIDEBAR
-    -->
+        <section id="about" class="section container">
+            <p class="about-text" id="about-text">
+                I'm a 19-year-old developer and a student at the <span class="highlight">College of Engineering, Trivandrum</span>, pursuing a degree in <span class="highlight">Electrical and Computer Engineering</span>. My primary passion lies in building functional and user-friendly <span class="highlight">desktop applications with Python</span>.
+            </p>
+        </section>
 
-    <aside class="sidebar" data-sidebar>
+        <section id="projects" class="perspective-container">
+            <div class="sticky-container">
+                <div class="projects-grid-wrapper" id="projects-wrapper">
+                    <div class="projects-grid">
+                        <a href="https://github.com/rohankishore/Aura-Text" target="_blank" class="project-card"><h3>Aura-Text</h3><p>A versatile IDE & Text Editor built with PyQt6, designed for extensibility.</p></a>
+                        <a href="https://github.com/rohankishore/Youtility" target="_blank" class="project-card"><h3>Youtility</h3><p>A sleek, modern YouTube downloader that handles videos, playlists, and audio.</p></a>
+                        <a href="https://github.com/rohankishore/Spotifyte" target="_blank" class="project-card"><h3>Spotifyte</h3><p>Spotify track and playlist downloader made with PySide6 and SpotDL.</p></a>
+                        <a href="https://github.com/rohankishore/CashFlow" target="_blank" class="project-card"><h3>CashFlow</h3><p>A simple finance manager app with expense and income tracking, built in Python.</p></a>
+                        <a href="https://github.com/rohankishore/AnimeSnap" target="_blank" class="project-card"><h3>AnimeSnap</h3><p>Identifies an anime's details from just a screenshot using the trace.moe API.</p></a>
+                        <a href="https://github.com/rohankishore/Tempus" target="_blank" class="project-card"><h3>Tempus</h3><p>Desktop calendar with TODOs, Horoscopes, and Reminders made with PyQt6.</p></a>
+                        <a href="https://github.com/rohankishore/Schemix" target="_blank" class="project-card"><h3>Schemix</h3><p>An all-in-one IDE for Engineers, Scientists, and Students for scientific computing.</p></a>
+                        <a href="https://github.com/rohankishore" target="_blank" class="project-card"><h3>And more...</h3><p>Check out all my projects and contributions on GitHub.</p></a>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-      <div class="sidebar-info">
+        <section class="section container">
+             <h2 class="section-title">GitHub Activity</h2>
+            <br>
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem;">
+                <img src="https://github-readme-stats.vercel.app/api?username=rohankishore&theme=jolly&show_icons=true&hide_border=true&count_private=true&bg_color=03001400" alt="Rohan's GitHub Stats">
+                <img src="https://github-readme-streak-stats.herokuapp.com/?user=rohankishore&theme=jolly&hide_border=true&background=03001400" alt="Rohan's GitHub Stats">
+            </div>
+            <br>
+            <div class="github-graph-container">
+                <div class="github-graph" id="github-graph"></div>
+                <div class="github-info">
+                    <span>A Glimpse of My Contributions</span>
+                    <div class="legend">Less&nbsp;&nbsp;■ ■ ■ ■ ■&nbsp;&nbsp;More</div>
+                </div>
+            </div>
+        </section>
 
-        <figure class="avatar-box">
-          <img src="./assets/images/my-avatar.png" alt="Rohan Kishore" width="80">
-        </figure>
+        <section id="skills" class="section container">
+            <h2 class="section-title">Skills & Platforms</h2>
+            <p class="section-subtitle">My key expertises and technical proficiencies</p>
+            <div class="skills-grid-wrapper" id="skills-wrapper">
+                <div class="skills-grid">
+                    <div class="skill-item">Python</div><div class="skill-item">PyQt6</div><div class="skill-item">Tkinter</div><div class="skill-item">NumPy</div><div class="skill-item">Matplotlib</div><div class="skill-item">C++</div><div class="skill-item">HTML</div><div class="skill-item">CSS</div><div class="skill-item">SQL</div><div class="skill-item">Git</div><div class="skill-item">GitHub</div><div class="skill-item">Figma</div><div class="skill-item">Canva</div><div class="skill-item">PyCharm</div><div class="skill-item">VS Code</div><div class="skill-item">Windows</div><div class="skill-item">ChatGPT</div><div class="skill-item">Perplexity</div><div class="skill-item">Google Gemini</div>
+                </div>
+            </div>
+        </section>
 
-        <div class="info-content">
-          <h1 class="name" title="Rohan Kishore">Rohan Kishore</h1>
+        <section id="testimonials" class="section container">
+            <h2 class="section-title">Testimonials</h2>
+            <p class="section-subtitle">Recommendations from people I know and work with, on Fiverr</p>
+            <div class="testimonials-grid">
+                <div class="testimonial-card"><p class="quote">"Rohan absolutely killed it. He do a pleasure to work with and extremely skilled. The library I chose to work with was inefficient and he even re-coded everything overnight! I had many request and things to update and he did it no problem. This guy is the real deal, will definitely recommend!!"</p><p class="author">Terry TJ</p><p class="role">Fiverr Customer</p></div>
+                <div class="testimonial-card"><p class="quote">"Dude is a machine, he took the task and started working on it before I placed the gig, would recommend for the skills and high spirit."</p><p class="author">Rafa Navas Dias</p><p class="role">Fiverr Customer</p></div>
+                <div class="testimonial-card"><p class="quote">"literally saved my life "</p><p class="author">Ryan Haoyuan</p><p class="role">Fiverr Customer</p></div>
+                <div class="testimonial-card"><p class="quote">"I absolutely love this man, i had previously consulted another man for the work, however he ghosted me. I requested an offer from roshan and he delivered quality work in only a few hours. I really am so thankful and i appreciate it so much bro, thank you so much"</p><p class="author">Sarangay</p><p class="role">Fiverr Customer</p></div>
+                <div class="testimonial-card"><p class="quote">"I am still shocked on how rohan executed it for me. The project was done just like how I wanted it to be. Very responsive and also made sure in dending me updates every now and then after finishing a task. Will fully reccomend, Bro was calm in whatever changes I wanted him to make."</p><p class="author">theboywhosails</p><p class="role">Fiverr Customer</p></div>
+                <div class="testimonial-card"><p class="quote">"Rohan replied very quickly and handed in the project right away "</p><p class="author">Marco Leonardi</p><p class="role">Fiverr Customer</p></div>
+            </div>
+        </section>
 
-          <p class="title">Python Developer</p>
+        <section id="resume" class="section container cta-section">
+            <h2 class="section-title">My Resume</h2>
+            <p class="section-subtitle">For a more detailed look at my skills and experiences, please feel free to download my resume.</p>
+            <a href="resume.pdf" download class="button button-primary">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 15.586l-4.293-4.293-1.414 1.414L12 18.414l5.707-5.707-1.414-1.414L12 15.586zM12 4v10.586l-1.707-1.707-1.414 1.414L12 18.414l3.121-3.121 1.414-1.414L12 12.586V4h-1zM5 20h14a1 1 0 0 0 1-1v-5h-2v4H6v-4H4v5a1 1 0 0 0 1 1z"/></svg>
+                Download Resume
+            </a>
+        </section>
+
+        <section id="fiverr" class="section container cta-section">
+            <h2 class="section-title">Available for Freelance Work</h2>
+            <p class="section-subtitle">I offer professional services in Python desktop application development, scripting, and automation. Let's build something amazing together!</p>
+            <a href="https://www.fiverr.com/sellers/rohancodespy/" target="_blank" class="button button-fiverr">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.61,8.468h-3.379v-0.54c0-0.552,0.449-1,1-1h1.794c0.551,0,1-0.448,1-1s-0.449-1-1-1h-1.794c-1.654,0-3,1.346-3,3v0.54 H9.581c-0.551,0-1,0.448-1,1s0.449,1,1,1h3.649v8.468h2v-8.468h3.379c0.551,0,1-0.448,1-1S19.161,8.468,18.61,8.468z M14.231,2.928 c-0.551,0-1,0.448-1,1s0.449,1,1,1s1-0.448,1-1S14.782,2.928,14.231,2.928z"/></svg>
+                Hire Me on Fiverr
+            </a>
+        </section>
+
+    </main>
+
+    <footer id="contact" class="footer">
+        <div class="footer-bg"></div>
+        <div class="footer-content container">
+            <div class="footer-column"><h4>Rohan Kishore</h4><p>Aspiring Innovator. Currently building cool things with Python. Thanks for stopping by!</p></div>
+            <div class="footer-column"><h4>Quick Links</h4><p><a href="#home">Home</a></p><p><a href="#projects">Projects</a></p><p><a href="#about">About</a></p><p><a href="#contact">Contact</a></p></div>
+            <div class="footer-column"><h4>Get in Touch</h4><p>📍 Thrissur, India</p></div>
+            <div class="footer-column"><h4>Connect</h4><div class="footer-socials"><a href="https://github.com/rohankishore" target="_blank" aria-label="Github"><svg viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg></a><a href="https://www.linkedin.com/in/rohankishore/" target="_blank" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5V8h3zM6.5 6.73c-.97 0-1.75-.79-1.75-1.76s.78-1.76 1.75-1.76 1.75.79 1.75 1.76-.78 1.76-1.75 1.76zM19 19h-3v-5.6c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.13 1.44-2.13 2.94V19h-3V8h2.88v1.32h.04c.4-.76 1.38-1.55 2.84-1.55 3.04 0 3.6 2 3.6 4.6V19z"></path></svg></a><a href="https://www.hackerrank.com/profile/rohankishore7461" target="_blank" aria-label="HackerRank"><svg viewBox="0 0 128 128"><path fill-rule="evenodd" clip-rule="evenodd" d="M37.333 117.333V58.667h10.667v58.666H37.333zM90.667 10.667v58.666H80V10.667h10.667zM64 128c35.346 0 64-28.654 64-64S99.346 0 64 0 0 28.654 0 64s28.654 64 64 64zm-16-10.667V37.333h10.667v80H48zm32-80v80h-10.667V37.333H80z"/></svg></a></div></div>
         </div>
-
-        <button class="info_more-btn" data-sidebar-btn>
-          <span>Show Contacts</span>
-
-          <ion-icon name="chevron-down"></ion-icon>
-        </button>
-
-      </div>
-
-      <div class="sidebar-info_more">
-
-        <div class="separator"></div>
-
-        <ul class="contacts-list">
-
-          <li class="contact-item">
-
-            <div class="icon-box">
-              <ion-icon name="mail-outline"></ion-icon>
-            </div>
-
-            <div class="contact-info">
-              <p class="contact-title">Email</p>
-
-              <a href="mailto:rohankishore746@outlook.com" class="contact-link">rohankishore746@outlook.com</a>
-            </div>
-
-          </li>
-
-
-
-          <li class="contact-item">
-
-            <div class="icon-box">
-              <ion-icon name="calendar-outline"></ion-icon>
-            </div>
-
-            <div class="contact-info">
-              <p class="contact-title">Birthday</p>
-
-              <time datetime="24-07-2006">July 24, 2006</time>
-            </div>
-
-          </li>
-
-          <li class="contact-item">
-
-            <div class="icon-box">
-              <ion-icon name="location-outline"></ion-icon>
-            </div>
-
-            <div class="contact-info">
-              <p class="contact-title">Location</p>
-
-              <address>Thrissur, Kerala, India</address>
-            </div>
-
-          </li>
-
-        </ul>
-
-        <div class="separator"></div>
-
-        <ul class="social-list">
-
-          <li class="social-item">
-            <a href="https://twitter.com/Aura_Text" class="social-link">
-              <ion-icon name="logo-twitter"></ion-icon>
-            </a>
-          </li>
-
-          <li class="social-item">
-            <a href="https://www.instagram.com/_.j0ps/" class="social-link">
-              <ion-icon name="logo-instagram"></ion-icon>
-            </a>
-          </li>
-
-          <li class="social-item">
-            <a href="https://github.com/rohankishore" class="social-link">
-              <ion-icon name="logo-github"></ion-icon>
-            </a>
-          </li>
-
-           <li class="social-item">
-            <a href="https://www.linkedin.com/in/rohankishore/" class="social-link">
-              <ion-icon name="logo-linkedin"></ion-icon>
-            </a>
-          </li>
-
-
-        </ul>
-
-      </div>
-
-    </aside>
-
-
-
-
-
-    <!--
-      - #main-content
-    -->
-
-    <div class="main-content">
-
-      <!--
-        - #NAVBAR
-      -->
-
-      <nav class="navbar">
-
-        <ul class="navbar-list">
-
-          <li class="navbar-item">
-            <button class="navbar-link  active" data-nav-link>About</button>
-          </li>
-
-          <li class="navbar-item">
-            <button class="navbar-link" data-nav-link>Resume</button>
-          </li>
-
-          <li class="navbar-item">
-            <button class="navbar-link" data-nav-link>Portfolio</button>
-          </li>
-
-          <li class="navbar-item">
-            <button class="navbar-link" data-nav-link>Contact</button>
-          </li>
-
-        </ul>
-
-      </nav>
-
-
-
-
-
-      <!--
-        - #ABOUT
-      -->
-
-      <article class="about  active" data-page="about">
-
-        <header>
-          <h2 class="h2 article-title">About me</h2>
-        </header>
-
-        <section class="about-text">
-          <p>
-            I am an 19-year-old Python developer and freelancer from Kerala, India, with five years of development experience.
-            My expertise includes working with PyQt, NumPy, Matplotlib, and a variety of other technologies.
-          </p>
-
-          <p>
-            My goal is to contribute to open source projects while making a positive impact on society.
-            By leveraging my technical skills and experience, I aim to develop and support software solutions that address
-            real-world challenges, promote collaboration, and enhance the quality of life for communities worldwide.
-          </p>
-
-          <a href="https://www.github.com/rohankishore/"><img class="gitroll_badge" src="https://github-widgetbox.vercel.app/api/profile?username=rohankishore&data=followers,repositories,stars,commits" /></a>
-
-        </section>
-
-
-        <!--
-          - service
-        -->
-
-        <section class="service">
-
-          <h3 class="h3 service-title">What i'm doing</h3>
-
-          <ul class="service-list">
-
-            <li class="service-item">
-
-              <div class="service-icon-box">
-                <img src="./assets/images/icon-design.svg
-                " alt="design icon" width="40">
-              </div>
-
-              <div class="service-content-box">
-                <h4 class="h4 service-item-title">GUI design</h4>
-
-                <p class="service-item-text">
-                  The most modern and high-quality GUI design made at a professional level.
-                </p>
-              </div>
-
-            </li>
-
-            <li class="service-item">
-
-              <div class="service-icon-box">
-                <img src="./assets/images/icon-dev.svg" alt="Web development icon" width="40">
-              </div>
-
-              <div class="service-content-box">
-                <h4 class="h4 service-item-title">Python development</h4>
-
-                <p class="service-item-text">
-                  Developing Python libraries and also apps like Plotium, Youtility and much more
-                </p>
-              </div>
-
-            </li>
-
-            <li class="service-item">
-
-              <div class="service-icon-box">
-                <img src="./assets/images/icon-dev.svg" alt="Web development icon" width="40">
-              </div>
-
-              <div class="service-content-box">
-                <h4 class="h4 service-item-title">Freelancing</h4>
-
-                <p class="service-item-text">
-                I periodically take on freelance projects on Fiverr, where
-                  I apply my skills to help clients with various technical needs.
-                  <a href="https://www.fiverr.com/rohancodespy/">Fiverr</a>
-                </p>
-              </div>
-
-            </li>
-
-            <li class="service-item">
-
-              <div class="service-icon-box">
-                <img src="./assets/images/icon-comp.svg" alt="HackerRank" width="40">
-              </div>
-
-              <div class="service-content-box">
-                <h4 class="h4 service-item-title">Competitive Programming</h4>
-
-                <p class="service-item-text">
-                  I regularly solve Data Structures, Algorithms, and Statistical
-                  challenges on HackerRank to sharpen my skills and expand my knowledge.
-                  <a href="https://www.hackerrank.com/profile/rohankishore7461">HackerRank</a>
-                </p>
-              </div>
-
-            </li>
-
-            <li class="service-item">
-
-              <div class="service-icon-box">
-                <img src="./assets/images/icon-learn.svg" alt="Web development icon" width="40">
-              </div>
-
-              <div class="service-content-box">
-                <h4 class="h4 service-item-title">Learning</h4>
-
-                <p class="service-item-text">
-                  Well, you don't stop learning till you die, do you?
-                </p>
-              </div>
-
-            </li>
-
-          </ul>
-
-        </section>
-
-
-
-
-        <div class="modal-container" data-modal-container>
-
-          <div class="overlay" data-overlay></div>
-
-          <section class="testimonials-modal">
-
-            <button class="modal-close-btn" data-modal-close-btn>
-              <ion-icon name="close-outline"></ion-icon>
-            </button>
-
-            <div class="modal-img-wrapper">
-              <figure class="modal-avatar-box">
-                <img src="./assets/images/avatar-1.png" alt="Daniel lewis" width="80" data-modal-img>
-              </figure>
-
-              <img src="./assets/images/icon-quote.svg" alt="quote icon">
-            </div>
-
-            <div class="modal-content">
-
-              <h4 class="h3 modal-title" data-modal-title>Daniel lewis</h4>
-
-              <time datetime="2021-06-14">14 June, 2021</time>
-
-              <div data-modal-text>
-                <p>
-                  Richard was hired to create a corporate identity. We were very pleased with the work done. She has a
-                  lot of experience
-                  and is very concerned about the needs of client. Lorem ipsum dolor sit amet, ullamcous cididt
-                  consectetur adipiscing
-                  elit, seds do et eiusmod tempor incididunt ut laborels dolore magnarels alia.
-                </p>
-              </div>
-
-            </div>
-
-          </section>
-
+        <div class="footer-bottom container">
+            <p>© 2025 Rohan Kishore | All rights reserved.</p>
         </div>
-
-      </article>
-
-
-
-
-
-      <!--
-        - #RESUME
-      -->
-
-      <article class="resume" data-page="resume">
-
-        <header>
-          <h2 class="h2 article-title">Resume</h2>
-        </header>
-
-        <section class="timeline">
-
-          <div class="title-wrapper">
-            <div class="icon-box">
-              <ion-icon name="book-outline"></ion-icon>
-            </div>
-
-            <h3 class="h3">Education</h3>
-          </div>
-
-          <ol class="timeline-list">
-
-            <li class="timeline-item">
-
-              <h4 class="h4 timeline-item-title">College of Engineering, Trivandrum </h4>
-
-              <span>2025 — 202x</span>
-
-              <p class="timeline-text">
-                BTech in Electrical & Computer Engineering
-              </p>
-
-            </li>
-
-            <li class="timeline-item">
-
-              <h4 class="h4 timeline-item-title">Vivekodayam Boys HSS</h4>
-
-              <span>2018 — 2024</span>
-
-              <p class="timeline-text">
-                Completed High school and Higher Secondary School here. Passed 12th with 97.1% aggregate, and 99.2% in 12th alone.
-              </p>
-
-            </li>
-
-          </ol>
-
-        </section>
-
-        <!-- FUTURE REF: -->
-        <!--  You can add your experience later -->
-
-        <!-- <section class="timeline"> -->
-
-        <!--   <div class="title-wrapper"> -->
-        <!--     <div class="icon-box"> -->
-        <!--       <ion-icon name="book-outline"></ion-icon> -->
-        <!--     </div> -->
-
-        <!--     <h3 class="h3">Experience</h3> -->
-        <!--   </div> -->
-
-        <!--   <ol class="timeline-list"> -->
-
-        <!--     <li class="timeline-item"> -->
-
-        <!--       <h4 class="h4 timeline-item-title">-</h4> -->
-
-        <!--       <span>202x — 202x</span> -->
-
-        <!--       <p class="timeline-text"> -->
-        <!--         - -->
-        <!--       </p> -->
-
-        <!--     </li> -->
-
-        <!--     <li class="timeline-item"> -->
-
-        <!--       <h4 class="h4 timeline-item-title">-</h4> -->
-
-        <!--       <span>202x — 202x</span> -->
-
-        <!--       <p class="timeline-text"> -->
-        <!--         - -->
-        <!--       </p> -->
-
-        <!--     </li> -->
-
-        <!--     <li class="timeline-item"> -->
-
-        <!--       <h4 class="h4 timeline-item-title">-</h4> -->
-
-        <!--       <span>202x — 202x</span> -->
-
-        <!--       <p class="timeline-text"> -->
-        <!--         - -->
-        <!--       </p> -->
-
-        <!--     </li> -->
-
-        <!--   </ol> -->
-
-        <!-- </section> -->
-
-        <section class="skill">
-
-          <h3 class="h3 skills-title">My skills</h3>
-
-          <ul class="skills-list content-card">
-
-            <li class="skills-item">
-
-              <div class="title-wrapper">
-                <h5 class="h5">Python</h5>
-                <data value="80">85%</data>
-              </div>
-
-              <div class="skill-progress-bg">
-                <div class="skill-progress-fill" style="width: 80%;"></div>
-              </div>
-
-            </li>
-
-            <li class="skills-item">
-
-              <div class="title-wrapper">
-                <h5 class="h5">GUI Design (Tkinter & PyQt)</h5>
-                <data value="70">90%</data>
-              </div>
-
-              <div class="skill-progress-bg">
-                <div class="skill-progress-fill" style="width: 90%;"></div>
-              </div>
-
-            </li>
-
-            <li class="skills-item">
-
-              <div class="title-wrapper">
-                <h5 class="h5">Graphic design</h5>
-                <data value="40">40%</data>
-              </div>
-
-              <div class="skill-progress-bg">
-                <div class="skill-progress-fill" style="width: 70%;"></div>
-              </div>
-
-            </li>
-
-            <li class="skills-item">
-              <div class="title-wrapper">
-                <h5 class="h5">Numpy</h5>
-                <data value="40">50%</data>
-              </div>
-
-              <div class="skill-progress-bg">
-                <div class="skill-progress-fill" style="width: 70%;"></div>
-              </div>
-
-            </li>
-
-            <li class="skills-item">
-              <div class="title-wrapper">
-                <h5 class="h5">Matplotlib</h5>
-                <data value="40">40%</data>
-              </div>
-
-              <div class="skill-progress-bg">
-                <div class="skill-progress-fill" style="width: 70%;"></div>
-              </div>
-
-            </li>
-
-                        <li class="skills-item">
-              <div class="title-wrapper">
-                <h5 class="h5">Numpy</h5>
-                <data value="40">50%</data>
-              </div>
-
-              <div class="skill-progress-bg">
-                <div class="skill-progress-fill" style="width: 70%;"></div>
-              </div>
-
-            </li>
-
-                        <li class="skills-item">
-              <div class="title-wrapper">
-                <h5 class="h5">Git</h5>
-                <data value="40">70%</data>
-              </div>
-
-              <div class="skill-progress-bg">
-                <div class="skill-progress-fill" style="width: 70%;"></div>
-              </div>
-
-            </li>
-
-                        <li class="skills-item">
-              <div class="title-wrapper">
-                <h5 class="h5">PyCharm & VSCode</h5>
-                <data value="40">80%</data>
-              </div>
-
-              <div class="skill-progress-bg">
-                <div class="skill-progress-fill" style="width: 70%;"></div>
-              </div>
-
-            </li>
-
-          </ul>
-
-        </section>
-
-      </article>
-
-
-
-
-
-      <!--
-        - #PORTFOLIO
-      -->
-
-      <article class="portfolio" data-page="portfolio">
-
-        <header>
-          <h2 class="h2 article-title">Portfolio</h2>
-        </header>
-
-        <section class="projects">
-
-          <ul class="filter-list">
-
-            <li class="filter-item">
-              <button class="active" data-filter-btn>All</button>
-            </li>
-
-            <li class="filter-item">
-              <button data-filter-btn>Applications</button>
-            </li>
-
-            <li class="filter-item">
-              <button data-filter-btn>Libraries</button>
-            </li>
-
-            <li class="filter-item">
-              <button data-filter-btn>CLI</button>
-            </li>
-
-          </ul>
-
-          <div class="filter-select-box">
-
-            <button class="filter-select" data-select>
-
-              <div class="select-value" data-selecct-value>Select category</div>
-
-              <div class="select-icon">
-                <ion-icon name="chevron-down"></ion-icon>
-              </div>
-
-            </button>
-
-            <ul class="select-list">
-
-              <li class="select-item">
-                <button data-select-item>All</button>
-              </li>
-
-              <li class="select-item">
-                <button data-select-item>Applications</button>
-              </li>
-
-              <li class="select-item">
-                <button data-select-item>Libraries</button>
-              </li>
-
-              <li class="select-item">
-                <button data-select-item>CLI</button>
-              </li>
-
-            </ul>
-
-          </div>
-
-          <ul class="project-list">
-
-            <li class="project-item  active" data-filter-item data-category="applications">
-              <a href="#">
-
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-
-                  <img src="./assets/images/project-1.png" alt="auratext" loading="lazy">
-                </figure>
-
-                <h3 class="project-title">Aura Text</h3>
-
-                <p class="project-category">Applications</p>
-
-              </a>
-            </li>
-
-            <li class="project-item  active" data-filter-item data-category="applications">
-              <a href="#">
-
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-
-                  <img src="./assets/images/project-2.png" alt="youtility" loading="lazy">
-                </figure>
-
-                <h3 class="project-title">Youtility</h3>
-
-                <p class="project-category">Applications</p>
-
-              </a>
-            </li>
-
-            <li class="project-item  active" data-filter-item data-category="applications">
-              <a href="#">
-
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-
-                  <img src="./assets/images/project-3.png" alt="zennotes" loading="lazy">
-                </figure>
-
-                <h3 class="project-title">ZenNotes</h3>
-
-                <p class="project-category">Applications</p>
-
-              </a>
-            </li>
-
-            <li class="project-item  active" data-filter-item data-category="applications">
-              <a href="#">
-
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-
-                  <img src="./assets/images/project-4.png" alt="spotifyte" loading="lazy">
-                </figure>
-
-                <h3 class="project-title">Spotifyte</h3>
-
-                <p class="project-category">Applications</p>
-
-              </a>
-            </li>
-
-
-            <li class="project-item  active" data-filter-item data-category="applications">
-              <a href="#">
-
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-
-                  <img src="./assets/images/project-12.png" alt="submind" loading="lazy">
-                </figure>
-
-                <h3 class="project-title">Submind</h3>
-
-                <p class="project-category">Applications</p>
-
-              </a>
-            </li>
-
-
-
-            <li class="project-item  active" data-filter-item data-category="applications">
-              <a href="#">
-
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-
-                  <img src="./assets/images/project-5.png" alt="cashflow" loading="lazy">
-                </figure>
-
-                <h3 class="project-title">CashFlow</h3>
-
-                <p class="project-category">Applications</p>
-
-              </a>
-            </li>
-
-            <li class="project-item  active" data-filter-item data-category="applications">
-              <a href="#">
-
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-
-                  <img src="./assets/images/project-6.png" alt="animesnap" loading="lazy">
-                </figure>
-
-                <h3 class="project-title">AnimeSnap</h3>
-
-                <p class="project-category">Applications</p>
-
-              </a>
-            </li>
-
-
-            <li class="project-item  active" data-filter-item data-category="applications">
-              <a href="#">
-
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-
-                  <img src="./assets/images/project-7.png" alt="graphyte" loading="lazy">
-                </figure>
-
-                <h3 class="project-title">Graphyte</h3>
-
-                <p class="project-category">Applications</p>
-
-              </a>
-            </li>
-
-            <li class="project-item  active" data-filter-item data-category="applications">
-              <a href="#">
-
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-
-                  <img src="./assets/images/project-8.png" alt="tempus" loading="lazy">
-                </figure>
-
-                <h3 class="project-title">Tempus</h3>
-
-                <p class="project-category">Applications</p>
-
-              </a>
-            </li>
-
-            <li class="project-item  active" data-filter-item data-category="libraries">
-              <a href="#">
-
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-
-                  <img src="./assets/images/project-9.png" alt="physipy" loading="lazy">
-                </figure>
-
-                <h3 class="project-title">PhysiPy</h3>
-
-                <p class="project-category">Libraries</p>
-
-              </a>
-            </li>
-
-            <li class="project-item  active" data-filter-item data-category="libraries">
-              <a href="#">
-
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-
-                  <img src="./assets/images/project-10.png" alt="plotium" loading="lazy">
-                </figure>
-
-                <h3 class="project-title">Plotium</h3>
-
-                <p class="project-category">Libraries</p>
-
-              </a>
-            </li>
-
-            <li class="project-item  active" data-filter-item data-category="cli">
-              <a href="#">
-
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-
-                  <img src="./assets/images/project-11.png" alt="pastecmd" loading="lazy">
-                </figure>
-
-                <h3 class="project-title">PasteCMD</h3>
-
-                <p class="project-category">CLI</p>
-
-              </a>
-            </li>
-
-          </ul>
-
-        </section>
-
-      </article>
-
-
-
-
-
-
-
-
-
-
-      <!--
-        - #CONTACT
-      -->
-
-      <article class="contact" data-page="contact">
-
-        <header>
-          <h2 class="h2 article-title">Contact</h2>
-        </header>
-
-        <section class="mapbox" data-mapbox>
-          <figure>
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d125531.64342413832!2d76.22325045!3d10.511387599999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba7ee15ed42d1bb%3A0x82e45aa016ca7db!2sThrissur%2C%20Kerala!5e0!3m2!1sen!2sin!4v1723061687462!5m2!1sen!2sin"
-              width="400" height="300" loading="lazy"></iframe>
-          </figure>
-        </section>
-
-        <section class="contact-form">
-
-          <h3 class="h3 form-title">Contact Form</h3>
-
-          <form action="#" class="form" data-form>
-
-            <div class="input-wrapper">
-              <input type="text" name="fullname" class="form-input" placeholder="Full name" required data-form-input>
-
-              <input type="email" name="email" class="form-input" placeholder="Email address" required data-form-input>
-            </div>
-
-            <textarea name="message" class="form-input" placeholder="Your Message" required data-form-input></textarea>
-
-            <button class="form-btn" type="submit" disabled data-form-btn>
-              <ion-icon name="paper-plane"></ion-icon>
-              <span>Send Message</span>
-            </button>
-
-          </form>
-
-        </section>
-
-      </article>
-
-    </div>
-
-  </main>
-
-
-
-
-
-
-  <!--
-    - custom js link
-  -->
-  <script src="./assets/js/script.js"></script>
-
-  <!--
-    - ionicon link
-  -->
-  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-
+    </footer>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorOutline = document.querySelector('.cursor-outline');
+        window.addEventListener('mousemove', e => {
+            const posX = e.clientX;
+            const posY = e.clientY;
+            cursorDot.style.left = `${posX}px`;
+            cursorDot.style.top = `${posY}px`;
+            cursorOutline.style.left = `${posX}px`;
+            cursorOutline.style.top = `${posY}px`;
+        });
+        const interactiveElements = document.querySelectorAll('a, button, .project-card, .skill-item');
+        interactiveElements.forEach(el => {
+            el.addEventListener('mouseenter', () => cursorOutline.classList.add('cursor-interact'));
+            el.addEventListener('mouseleave', () => cursorOutline.classList.remove('cursor-interact'));
+        });
+
+        const typewriterText = "Engineering Student & Aspiring Innovator";
+        const typewriterElement = document.getElementById('typewriter-text');
+        let charIndex = 0;
+        function type() {
+            if (charIndex < typewriterText.length) {
+                typewriterElement.textContent += typewriterText.charAt(charIndex);
+                charIndex++;
+                setTimeout(type, 80);
+            }
+        }
+        setTimeout(type, 500);
+
+        const perspectiveContainer = document.querySelector('.perspective-container');
+        const projectsWrapper = document.getElementById('projects-wrapper');
+        const initialRotateX = 60, initialTranslateZ = -500;
+        projectsWrapper.style.transform = `translateX(-50%) translateY(-50%) rotateX(${initialRotateX}deg) translateZ(${initialTranslateZ}px)`;
+        window.addEventListener('scroll', () => {
+            const scrollStart = perspectiveContainer.offsetTop - window.innerHeight;
+            const scrollEnd = perspectiveContainer.offsetTop + perspectiveContainer.offsetHeight / 2 - window.innerHeight / 2;
+            let progress = (window.scrollY - scrollStart) / (scrollEnd - scrollStart);
+            progress = Math.max(0, Math.min(1, progress));
+            const currentRotateX = initialRotateX * (1 - progress);
+            const currentTranslateZ = initialTranslateZ * (1 - progress);
+            const currentScale = 1 + progress * 0.1;
+            requestAnimationFrame(() => {
+                projectsWrapper.style.transform = `translateX(-50%) translateY(-50%) rotateX(${currentRotateX}deg) translateZ(${currentTranslateZ}px) scale(${currentScale})`;
+            });
+        });
+
+        const graph = document.getElementById('github-graph');
+        if (graph) {
+            const totalDays = 53 * 7;
+            let dayOfWeek = new Date().getDay();
+            for (let i = 0; i < totalDays; i++) {
+                const day = document.createElement('div');
+                day.className = 'day';
+                const isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
+                const commitProbability = isWeekend ? 0.3 : 0.7;
+                if (Math.random() < commitProbability) {
+                    day.dataset.level = Math.ceil(Math.random() * 4);
+                }
+                graph.appendChild(day);
+                dayOfWeek = (dayOfWeek + 1) % 7;
+            }
+        }
+
+        const aboutTextContainer = document.getElementById('about-text');
+        const aboutTextSpans = aboutTextContainer.querySelectorAll('span');
+        const wordObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.8 });
+        aboutTextSpans.forEach(span => wordObserver.observe(span));
+
+        const skillsWrapper = document.getElementById('skills-wrapper');
+        skillsWrapper.addEventListener('mousemove', e => {
+            const rect = skillsWrapper.getBoundingClientRect();
+            skillsWrapper.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+            skillsWrapper.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+        });
+
+        const revealElements = document.querySelectorAll('.section');
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                }
+            });
+        }, { rootMargin: '0px 0px -100px 0px' });
+        revealElements.forEach(el => revealObserver.observe(el));
+    });
+    </script>
 </body>
-
 </html>
