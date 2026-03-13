@@ -323,6 +323,7 @@
   content: '';
   position: absolute;
   inset: 0;
+  pointer-events: none;
   background: linear-gradient(120deg, transparent 18%, rgba(84, 193, 255, 0.1) 50%, transparent 82%);
   opacity: 0;
   transform: translateX(-30%);
@@ -334,6 +335,7 @@
   content: '';
   position: absolute;
   inset: 1px;
+  pointer-events: none;
   border: 1px solid transparent;
   transition: border-color 220ms ease, box-shadow 220ms ease;
 }

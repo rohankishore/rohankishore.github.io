@@ -41,7 +41,7 @@ const projects = [
     year: '2026',
     meta: 'Currently Building',
     title: 'Koodaram',
-    repoUrl: 'https://github.com/rohankishore/Koodaram',
+    repoUrl: 'https://koodaram.vercel.app',
     description:
       'A community platform focused on connection, discovery, and smooth user interaction, with a product-first approach to frontend clarity.',
     tags: ['Web App', 'Community Platform', 'Frontend'],
@@ -165,7 +165,7 @@ function App() {
           <a href="#experience">Exp</a>
           <a href="#about">About</a>
           <a href="#contact">Contact</a>
-          <a className="nav__cta" href="#contact">
+          <a className="nav__cta" href="/resume.pdf" download>
             Resume
           </a>
         </nav>
@@ -186,7 +186,7 @@ function App() {
           </p>
 
           <div className="hero-actions">
-            <a className="button button--primary" href="#contact">
+            <a className="button button--primary" href="/resume.pdf" download>
               View Resume
             </a>
             <a className="button button--ghost" href="#work">
