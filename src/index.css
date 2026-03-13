@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;700&display=swap');
+
+:root {
+  --bg: #010204;
+  --bg-elevated: #06090c;
+  --text: #a9b7c6;
+  --text-strong: #edf4ff;
+  --muted: #6a7888;
+  --accent: #54c1ff;
+  --accent-soft: #8ed8ff;
+  --border: rgba(104, 128, 150, 0.22);
+  --border-strong: rgba(104, 128, 150, 0.35);
+  --grid-line: rgba(84, 193, 255, 0.045);
+  --shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+
+  --sans: 'Space Grotesk', 'Segoe UI', sans-serif;
+  --heading: 'Chakra Petch', 'Segoe UI', sans-serif;
+  --mono: 'IBM Plex Mono', Consolas, monospace;
+
+  color-scheme: dark;
+  font: 18px/1.5 var(--sans);
+  color: var(--text);
+  background:
+    radial-gradient(circle at top center, rgba(84, 193, 255, 0.08), transparent 28%),
+    linear-gradient(180deg, #040608 0%, #010204 48%, #020305 100%);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background: var(--bg);
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+    linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+  background-size: 40px 40px;
+  opacity: 0.2;
+}
+
+a {
+  transition: color 180ms ease, border-color 180ms ease, background-color 180ms ease;
+}
+
+#root {
+  width: min(1520px, 100%);
+  margin: 0 auto;
+  min-height: 100svh;
+  border-inline: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  background: linear-gradient(180deg, rgba(4, 6, 8, 0.98), rgba(1, 2, 4, 0.98));
+}
+
+h1,
+h2,
+p {
+  margin: 0;
+}
+
+@media (max-width: 1080px) {
+  :root {
+    font-size: 16px;
+  }
+
+  #root {
+    width: 100%;
+    border-inline: 0;
+  }
+}
