@@ -153,6 +153,10 @@ const contactItems = [
 ]
 
 function App() {
+  const openProject = (url) => {
+    window.open(url, '_blank', 'noopener,noreferrer')
+  }
+
   return (
     <main className="shell">
       <header className="masthead">
@@ -240,7 +244,19 @@ function App() {
 
         <div className="projects-grid">
           {projects.map((project) => (
-            <article className="project-card" key={project.id}>
+            <article
+              className="project-card"
+              key={project.id}
+              role="link"
+              tabIndex={0}
+              onClick={() => openProject(project.repoUrl)}
+              onKeyDown={(event) => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                  event.preventDefault()
+                  openProject(project.repoUrl)
+                }
+              }}
+            >
               <div className="project-card__topline">
                 <p className="project-card__meta">
                   {project.year} · {project.meta}
